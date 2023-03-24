@@ -6,9 +6,10 @@ import (
 
 func BenchmarkChannel(b *testing.B) {
 	b.StopTimer()
+	const worker_count = 1000
 	first_input := make(chan int)
 	var input = first_input
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < worker_count; i++ {
 		output := make(chan int)
 		go worker(input, output)
 		input = output
